@@ -3,7 +3,7 @@ Generic description of a pipelined matrix multiplier with 4 multiplier threads. 
 
 The core operates on 3 BRAMs stroring the input matrices A, B and the initial values of C. It uses all ports of BRAMs which makes 4 parallely running multiplications possible. So two lines of matrix A and two columns of matrix B are being siultaneously accesses and multiply accumlated to result in 4 cells of matrix C. The accumlators are initiated by the original 4 values of C that are getting later on updated.
 
-The calculation of C += A * B' enables multiplying larger matrices by partitioning them into ones that fit into the FPGA and calculate different areas of C separatly. This algorithm requires the accumlation of consecutively calculated sub-matrices of C.
+The calculation of C += A * B' enables multiplying larger matrices by partitioning them into ones that fit into the FPGA and calculate different areas of C separatly. This algorithm requires the accumlation of consecutive multiplications of sub-matrices of A and B.
 
 The design structure is pipelined to bring out the most of the Xilinx Artix structure, and would be capable of running at 300MHz, but the control structure's addressing limits this to 250MHz.
 
