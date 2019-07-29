@@ -53,7 +53,7 @@ architecture Behavioral of matrix_core is
 
     --state machines
     type state_T is (empty, load, start, full, flush);
-    signal state : state_T;-- := empty;
+    signal state : state_T;
     signal depthCounter : std_logic_vector(log2depth downto 0);
     signal ABcounter : std_logic_vector(log2Acols+log2Brows-2 downto 0);
     signal ready : std_logic;
@@ -90,12 +90,7 @@ architecture Behavioral of matrix_core is
 
     --supportive signals
     signal ramCaddr0, ramCaddr1 : std_logic_vector(log2Acols+log2Brows-1 downto 0);
-    
-
---??? talán ide FIFO kéne arra az esetre, ha nem pörög végig a pipeline-on az adat, mire kiolvasnánk a következõ címet... ??? 
- signal ramCaddrReg00, ramCaddrReg01, ramCaddrReg10, ramCaddrReg11 : std_logic_vector(log2Acols+log2Brows-1 downto 0);
-    
-    
+    signal ramCaddrReg00, ramCaddrReg01, ramCaddrReg10, ramCaddrReg11 : std_logic_vector(log2Acols+log2Brows-1 downto 0);
     signal ramCdata0, ramCdata1 : std_logic_vector(dataWidthC-1 downto 0);
     signal ramCout0, ramCout1 : std_logic_vector(dataWidthC-1 downto 0);
     signal ramCwriteEnable0, ramCwriteEnable1 : std_logic;
@@ -140,7 +135,6 @@ begin
                         ABcounter <= ABcounter + '1';
                     end if;
                 when flush =>
-                    --if (ABcounter(ABcounter'high) and depthCounter(depthCounter'high)) = '1' then
                     if restartPipe(6) = '1' then
                         state <= empty;
                         ready <= '1';
