@@ -1,4 +1,4 @@
-# VHDL_MATRIX_MULTIPLIER
+# Matrix multiplication with FPGA in VHDL
 - Generic description of a pipelined matrix multiplier with 4 multiplier threads. It calculates C += A * B'
 - The core operates on 3 BRAMs storing the input matrices A, B and the initial values of C. It uses all ports of BRAMs which makes 4 parallely running multiplications possible. So two lines of matrix A and two columns of matrix B are being siultaneously accessed and multiply accumlated to result in 4 cells of matrix C. The accumlators are initialized with the original 4 values of C that are later getting updated.
 - The calculation of C += A * B' enables multiplying larger matrices by partitioning them into ones that fit into the FPGA and calculate different areas of C separatly. This algorithm requires the accumlation of consecutive multiplications of sub-matrices of A and B.
